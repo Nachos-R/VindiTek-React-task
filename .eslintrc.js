@@ -19,6 +19,7 @@ module.exports = {
     ],
     'arrow-parens': ['error', 'as-needed'],
     'react/jsx-filename-extension': 0,
-    'linebreak-style': ['error', 'unix']
+    'linebreak-style': ['error', 'windows'],
+    'react/jsx-one-expression-per-line': [true, { allow: 'single-child' }]
   }
 };
