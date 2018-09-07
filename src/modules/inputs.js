@@ -18,7 +18,7 @@ export default function inputReducer(state = initialState, action) {
       return state.filter(item => item.id !== payload);
     case ON_CHANGE:
       const index = state.findIndex(item => item.id === payload.id);
-      const newState = [...state];
+      const newState = state.map(item => item);
       newState[index].text = payload.value;
       return newState;
     default:
