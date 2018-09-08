@@ -13,7 +13,9 @@ const initialState = [];
 
 export default function inputReducer(state = initialState, action) {
   const { payload, type } = action;
-  let index, newState;
+  let index;
+  let newState;
+
   switch (type) {
     case ADD_INPUT:
       return [...state, payload];
@@ -33,7 +35,7 @@ export default function inputReducer(state = initialState, action) {
 export const addInput = text => ({
   type: ADD_INPUT,
   payload: {
-    text: text || '',
+    text,
     id: uuid()
   }
 });

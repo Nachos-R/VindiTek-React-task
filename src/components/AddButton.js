@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 
 import InputContext from '../containers/input-context';
 
-const styles = theme => ({
+const styles = () => ({
   button: {
     margin: '0 auto'
   }

@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { inputOnChange } from '../modules/inputs';
+
+import InputContext from '../containers/input-context';
 
 const styles = theme => ({
   container: {
@@ -19,6 +18,11 @@ const styles = theme => ({
 });
 
 class TextFields extends React.Component {
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+    data: PropTypes.objectOf(PropTypes.string)
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -26,12 +30,12 @@ class TextFields extends React.Component {
     };
   }
 
-  handleChange = e => {
+  handleChange = (e, inputOnChange) => {
     this.setState(
       {
         text: e.target.value
       },
-      () => this.props.inputOnChange(this.props.data.id, this.state.text)
+      () => inputOnChange(this.props.data.id, this.state.text)
     );
   };
 
@@ -40,26 +44,19 @@ class TextFields extends React.Component {
     const { text } = this.state;
 
     return (
-      <TextField
-        label="Enter some text"
-        className={classes.textField}
-        value={text}
-        onChange={this.handleChange}
-        margin="normal"
-      />
+      <InputContext.Consumer>
+        {actions => (
+          <TextField
+            label="Enter some text"
+            className={classes.textField}
+            value={text}
+            onChange={e => this.handleChange(e, actions.inputOnChange)}
+            margin="normal"
+          />
+        )}
+      </InputContext.Consumer>
     );
   }
 }
 
-TextFields.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.objectOf(PropTypes.string)
-};
-
-export default compose(
-  withStyles(styles),
-  connect(
-    null,
-    { inputOnChange }
-  )
-)(TextFields);
+export default withStyles(styles)(TextFields);

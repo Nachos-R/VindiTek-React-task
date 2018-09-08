@@ -27,8 +27,8 @@ function Result(props) {
 }
 
 Result.propTypes = {
-  classes: PropTypes.object.isRequired,
-  inputs: PropTypes.arrayOf(PropTypes.instanceOf(Object))
+  classes: PropTypes.instanceOf(Object).isRequired,
+  inputs: PropTypes.arrayOf(PropTypes.instanceOf(Object)).isRequired
 };
 
 export default withStyles(styles)(Result);

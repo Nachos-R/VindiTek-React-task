@@ -1,7 +1,12 @@
 module.exports = {
   extends: 'airbnb',
   parserOptions: {
-    ecmaVersion: 6
+    ecmaVersion: 6,
+    ecmaFeatures: {
+      globalReturn: true,
+      experimentalObjectRestSpread: true,
+      jsx: true
+    }
   },
   env: {
     node: true,
@@ -21,6 +26,9 @@ module.exports = {
     'react/jsx-filename-extension': 0,
     'linebreak-style': ['error', 'windows'],
     'react/jsx-one-expression-per-line': [true, { allow: 'single-child' }],
-    'no-shadow': ['error', { allow: ['done'] }]
+    'no-shadow': [
+      'error',
+      { builtinGlobals: true, hoist: 'functions', allow: ['done'] }
+    ]
   }
 };

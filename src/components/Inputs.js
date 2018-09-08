@@ -1,26 +1,31 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import InputGroup from './InputGroup';
 
-const Inputs = props => {
-  const { inputs } = props;
-  return (
-    <Fragment>
-      {inputs.map(input => (
-        <InputGroup key={input.id} data={input} />
-      ))}
-    </Fragment>
-  );
-};
+class Inputs extends Component {
+  static propTypes = {
+    inputs: PropTypes.arrayOf(PropTypes.instanceOf(Object)).isRequired
+  };
 
-Inputs.propTypes = {
-  inputs: PropTypes.arrayOf(PropTypes.instanceOf(Object)).isRequired
-};
+  state = {
+    inputs: []
+  };
 
-const mapStateToProps = state => ({
-  inputs: state.inputs
-});
+  static getDerivedStateFromProps(nextProps) {
+    return { inputs: nextProps.inputs };
+  }
 
-export default connect(mapStateToProps)(Inputs);
+  render() {
+    const { inputs } = this.state;
+    return (
+      <Fragment>
+        {inputs.map(input => (
+          <InputGroup key={input.id} data={input} />
+        ))}
+      </Fragment>
+    );
+  }
+}
+
+export default Inputs;
