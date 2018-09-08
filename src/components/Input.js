@@ -19,9 +19,12 @@ const styles = theme => ({
 });
 
 class TextFields extends React.Component {
-  state = {
-    text: this.props.data.text
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: this.props.data.text
+    };
+  }
 
   handleChange = e => {
     this.setState(
@@ -34,12 +37,13 @@ class TextFields extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { text } = this.state;
 
     return (
       <TextField
         label="Enter some text"
         className={classes.textField}
-        value={this.state.text}
+        value={text}
         onChange={this.handleChange}
         margin="normal"
       />
@@ -49,7 +53,7 @@ class TextFields extends React.Component {
 
 TextFields.propTypes = {
   classes: PropTypes.object.isRequired,
-  text: PropTypes.string
+  data: PropTypes.objectOf(PropTypes.string)
 };
 
 export default compose(

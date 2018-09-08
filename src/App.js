@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import AppContainer from './containers/AppContainer';
 
 const App = () => (
   <div className="App">
-    <AppContainer />
+    <StrictMode>
+      <AppContainer />
+    </StrictMode>
   </div>
 );
 

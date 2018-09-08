@@ -1,6 +1,8 @@
 import uuid from 'uuid';
 import axios from 'axios';
 
+import validateBeforeOnchange from '../utils/validation';
+
 // types
 const ADD_INPUT = 'ADD_INPUT';
 const REMOVE_INPUT = 'REMOVE_INPUT';
@@ -11,15 +13,16 @@ const initialState = [];
 
 export default function inputReducer(state = initialState, action) {
   const { payload, type } = action;
+  let index, newState;
   switch (type) {
     case ADD_INPUT:
       return [...state, payload];
     case REMOVE_INPUT:
       return state.filter(item => item.id !== payload);
     case ON_CHANGE:
-      const index = state.findIndex(item => item.id === payload.id);
-      const newState = state.map(item => item);
-      newState[index].text = payload.value;
+      index = state.findIndex(item => item.id === payload.id);
+      newState = state.map(item => item);
+      newState[index].text = payload.text;
       return newState;
     default:
       return state;
@@ -52,10 +55,13 @@ export const removeInput = id => ({
   payload: id
 });
 
-export const inputOnChange = (id, value) => ({
-  type: ON_CHANGE,
-  payload: {
-    id,
-    value
-  }
-});
+export const inputOnChange = (id, value) => {
+  const text = validateBeforeOnchange(value);
+  return {
+    type: ON_CHANGE,
+    payload: {
+      id,
+      text
+    }
+  };
+};

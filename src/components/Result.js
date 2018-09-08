@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -14,7 +12,7 @@ const styles = theme => ({
   }
 });
 
-function PaperSheet(props) {
+function Result(props) {
   const { classes, inputs } = props;
 
   return (
@@ -28,15 +26,9 @@ function PaperSheet(props) {
   );
 }
 
-PaperSheet.propTypes = {
-  classes: PropTypes.object.isRequired
+Result.propTypes = {
+  classes: PropTypes.object.isRequired,
+  inputs: PropTypes.arrayOf(PropTypes.instanceOf(Object))
 };
 
-const mapStateToProps = state => ({
-  inputs: state.inputs
-});
-
-export default compose(
-  withStyles(styles),
-  connect(mapStateToProps)
-)(PaperSheet);
+export default withStyles(styles)(Result);

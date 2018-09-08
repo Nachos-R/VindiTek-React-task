@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
-import { addInput } from '../modules/inputs';
+import InputContext from '../containers/input-context';
 
 const styles = theme => ({
   button: {
@@ -14,32 +12,27 @@ const styles = theme => ({
 });
 
 const ContainedButtons = props => {
-  const { classes, addInput } = props;
+  const { classes } = props;
   return (
     <div className="row">
-      <Button
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        onClick={() => {
-          addInput('');
-        }}
-      >
-        ADD INPUT
-      </Button>
+      <InputContext.Consumer>
+        {addInput => (
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            onClick={addInput}
+          >
+            ADD INPUT
+          </Button>
+        )}
+      </InputContext.Consumer>
     </div>
   );
 };
 
 ContainedButtons.propTypes = {
-  classes: PropTypes.instanceOf(Object).isRequired,
-  addInput: PropTypes.func.isRequired
+  classes: PropTypes.instanceOf(Object).isRequired
 };
 
-export default compose(
-  withStyles(styles),
-  connect(
-    null,
-    { addInput }
-  )
-)(ContainedButtons);
+export default withStyles(styles)(ContainedButtons);

@@ -16,7 +16,7 @@ const Inputs = props => {
 };
 
 Inputs.propTypes = {
-  inputs: PropTypes.arrayOf(PropTypes.object).isRequired
+  inputs: PropTypes.arrayOf(PropTypes.instanceOf(Object)).isRequired
 };
 
 const mapStateToProps = state => ({
