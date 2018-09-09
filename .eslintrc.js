@@ -8,6 +8,7 @@ module.exports = {
       jsx: true
     }
   },
+  plugins: ['import', 'react', 'jsx-a11y'],
   env: {
     node: true,
     browser: true,

@@ -17,46 +17,23 @@ const styles = theme => ({
   }
 });
 
-class TextFields extends React.Component {
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
-    data: PropTypes.objectOf(PropTypes.string)
-  };
+const Input = ({ classes, data }) => (
+  <InputContext.Consumer>
+    {actions => (
+      <TextField
+        label="Enter some text"
+        className={classes.textField}
+        value={data.text}
+        onChange={e => actions.inputOnChange(data.id, e.target.value)}
+        margin="normal"
+      />
+    )}
+  </InputContext.Consumer>
+);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: this.props.data.text
-    };
-  }
+TextField.propTypes = {
+  classes: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.objectOf(PropTypes.string)
+};
 
-  handleChange = (e, inputOnChange) => {
-    this.setState(
-      {
-        text: e.target.value
-      },
-      () => inputOnChange(this.props.data.id, this.state.text)
-    );
-  };
-
-  render() {
-    const { classes } = this.props;
-    const { text } = this.state;
-
-    return (
-      <InputContext.Consumer>
-        {actions => (
-          <TextField
-            label="Enter some text"
-            className={classes.textField}
-            value={text}
-            onChange={e => this.handleChange(e, actions.inputOnChange)}
-            margin="normal"
-          />
-        )}
-      </InputContext.Consumer>
-    );
-  }
-}
-
-export default withStyles(styles)(TextFields);
+export default withStyles(styles)(Input);

@@ -8,7 +8,8 @@ const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2
+    paddingBottom: theme.spacing.unit * 2,
+    width: '100%'
   }
 });
 
@@ -16,7 +17,7 @@ function Result(props) {
   const { classes, inputs } = props;
 
   return (
-    <div>
+    <div className="row">
       <Paper className={classes.root} elevation={1}>
         <Typography variant="headline" component="h3">
           {inputs.map(item => item.text).join(' - ')}
