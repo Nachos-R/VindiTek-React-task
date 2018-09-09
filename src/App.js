@@ -3,9 +3,7 @@ import AppContainer from './containers/AppContainer';
 
 const App = () => (
   <div className="App">
-    <StrictMode>
-      <AppContainer />
-    </StrictMode>
+    <AppContainer />
   </div>
 );
 
