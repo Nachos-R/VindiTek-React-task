@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
-import InputContext from '../containers/input-context';
-
 const styles = () => ({
   button: {
     margin: '0 auto'
@@ -12,21 +10,17 @@ const styles = () => ({
 });
 
 const ContainedButtons = props => {
-  const { classes } = props;
+  const { classes, addInput } = props;
   return (
     <div className="row">
-      <InputContext.Consumer>
-        {addInput => (
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            onClick={addInput}
-          >
-            ADD INPUT
-          </Button>
-        )}
-      </InputContext.Consumer>
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        onClick={addInput}
+      >
+        ADD INPUT
+      </Button>
     </div>
   );
 };

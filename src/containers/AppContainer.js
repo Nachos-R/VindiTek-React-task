@@ -11,7 +11,6 @@ import {
 import AddButton from '../components/AddButton';
 import Inputs from '../components/Inputs';
 import ResultContainer from './ResultContainer';
-import InputContext from './input-context';
 
 class AppContainer extends Component {
   static propTypes = {
@@ -24,18 +23,21 @@ class AppContainer extends Component {
     getInitialResult();
   }
 
+  onChange = (id, value) => {
+    this.props.inputOnChange(id, value);
+  };
+
   render() {
-    const { addInput, inputOnChange, removeInput, inputs } = this.props;
-    const actions = { inputOnChange, removeInput };
+    const { addInput, removeInput, inputs } = this.props;
     return (
       <div className="container">
         <ResultContainer />
-        <InputContext.Provider value={actions}>
-          <Inputs inputs={inputs} />
-        </InputContext.Provider>
-        <InputContext.Provider value={() => addInput('')}>
-          <AddButton />
-        </InputContext.Provider>
+        <Inputs
+          inputs={inputs}
+          onChange={this.onChange}
+          removeInput={removeInput}
+        />
+        <AddButton addInput={() => addInput('')} />
       </div>
     );
   }

@@ -4,8 +4,6 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import InputContext from '../containers/input-context';
-
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit
@@ -16,22 +14,18 @@ const styles = theme => ({
 });
 
 const RemoveButton = props => {
-  const { classes, id } = props;
+  const { classes, id, removeInput } = props;
 
   return (
-    <InputContext.Consumer>
-      {actions => (
-        <Button
-          variant="contained"
-          color="secondary"
-          className={classes.button}
-          onClick={() => actions.removeInput(id)}
-        >
-          Delete
-          <DeleteIcon className={classes.rightIcon} />
-        </Button>
-      )}
-    </InputContext.Consumer>
+    <Button
+      variant="contained"
+      color="secondary"
+      className={classes.button}
+      onClick={() => removeInput(id)}
+    >
+      Delete
+      <DeleteIcon className={classes.rightIcon} />
+    </Button>
   );
 };
 

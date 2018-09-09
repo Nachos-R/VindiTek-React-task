@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
-import InputContext from '../containers/input-context';
-
 const styles = theme => ({
   container: {
     display: 'flex',
@@ -17,18 +15,14 @@ const styles = theme => ({
   }
 });
 
-const Input = ({ classes, data }) => (
-  <InputContext.Consumer>
-    {actions => (
-      <TextField
-        label="Enter some text"
-        className={classes.textField}
-        value={data.text}
-        onChange={e => actions.inputOnChange(data.id, e.target.value)}
-        margin="normal"
-      />
-    )}
-  </InputContext.Consumer>
+const Input = ({ classes, data, onChange }) => (
+  <TextField
+    label="Enter some text"
+    className={classes.textField}
+    value={data.text}
+    onChange={e => onChange(data.id, e.target.value)}
+    margin="normal"
+  />
 );
 
 TextField.propTypes = {
