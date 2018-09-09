@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
+import validateBeforeOnchange from '../utils/validation';
+
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
@@ -20,7 +22,7 @@ function Result(props) {
     <div className="row">
       <Paper className={classes.root} elevation={1}>
         <Typography variant="headline" component="h3">
-          {inputs.map(item => item.text).join(' - ')}
+          {inputs.map(item => validateBeforeOnchange(item.text)).join(' - ')}
         </Typography>
       </Paper>
     </div>
