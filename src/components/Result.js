@@ -12,22 +12,23 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
     width: '100%'
+  },
+  text: {
+    overflowWrap: 'break-word'
   }
 });
 
-function Result(props) {
-  const { classes, inputs } = props;
-
-  return (
-    <div className="row">
-      <Paper className={classes.root} elevation={1}>
-        <Typography variant="headline" component="h3">
-          {inputs.map(item => validateBeforeOnchange(item.text)).join(' - ')}
-        </Typography>
-      </Paper>
-    </div>
-  );
-}
+const Result = ({ classes, inputs }) => (
+  <div className="row">
+    <Paper className={classes.root} elevation={1}>
+      <Typography className={classes.text} variant="headline" component="h3">
+        {inputs.filter(input => input.text !== '').length > 0
+          ? inputs.map(item => validateBeforeOnchange(item.text)).join(' - ')
+          : 'No text yet...'}
+      </Typography>
+    </Paper>
+  </div>
+);
 
 Result.propTypes = {
   classes: PropTypes.instanceOf(Object).isRequired,

@@ -13,25 +13,22 @@ const styles = theme => ({
   }
 });
 
-const RemoveButton = props => {
-  const { classes, id, removeInput } = props;
-
-  return (
-    <Button
-      variant="contained"
-      color="secondary"
-      className={classes.button}
-      onClick={() => removeInput(id)}
-    >
-      Delete
-      <DeleteIcon className={classes.rightIcon} />
-    </Button>
-  );
-};
+const RemoveButton = ({ classes, id, removeInput }) => (
+  <Button
+    variant="contained"
+    color="secondary"
+    className={classes.button}
+    onClick={() => removeInput(id)}
+  >
+    Delete
+    <DeleteIcon className={classes.rightIcon} />
+  </Button>
+);
 
 RemoveButton.propTypes = {
   classes: PropTypes.instanceOf(Object).isRequired,
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
+  removeInput: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(RemoveButton);

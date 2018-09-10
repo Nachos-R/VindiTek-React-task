@@ -9,24 +9,22 @@ const styles = () => ({
   }
 });
 
-const ContainedButtons = props => {
-  const { classes, addInput } = props;
-  return (
-    <div className="row">
-      <Button
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        onClick={addInput}
-      >
-        ADD INPUT
-      </Button>
-    </div>
-  );
-};
+const ContainedButtons = ({ classes, addInput }) => (
+  <div className="row">
+    <Button
+      variant="contained"
+      color="primary"
+      className={classes.button}
+      onClick={addInput}
+    >
+      ADD INPUT
+    </Button>
+  </div>
+);
 
 ContainedButtons.propTypes = {
-  classes: PropTypes.instanceOf(Object).isRequired
+  classes: PropTypes.instanceOf(Object).isRequired,
+  addInput: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(ContainedButtons);

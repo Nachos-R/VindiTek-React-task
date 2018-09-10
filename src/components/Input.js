@@ -4,10 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
@@ -25,9 +21,10 @@ const Input = ({ classes, data, onChange }) => (
   />
 );
 
-TextField.propTypes = {
+Input.propTypes = {
   classes: PropTypes.instanceOf(Object).isRequired,
-  data: PropTypes.objectOf(PropTypes.string)
+  data: PropTypes.objectOf(PropTypes.string).isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(Input);

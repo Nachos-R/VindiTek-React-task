@@ -1,4 +1,4 @@
-import React, { StrictMode } from 'react';
+import React from 'react';
 import AppContainer from './containers/AppContainer';
 
 const App = () => (
